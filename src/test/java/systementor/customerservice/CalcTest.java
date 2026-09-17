@@ -12,6 +12,6 @@ public class CalcTest {
     public void testAdd(){
         Calc calc = new Calc();
         int result = calc.add(1,2);
-        assertEquals(result,3);
+        assertEquals(result,5);
     }
 }
