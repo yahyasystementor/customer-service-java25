@@ -51,11 +51,11 @@ jobs:
 
     - name: build image
       run: |
-        docker build -t yahyasystementor/customer-service-java25:1.0 .
+        docker build -t yahyasystementor/customer-service-java25:${{github.run_number}} .
 
     - name: push to docker hub
       run: |
-        docker push yahyasystementor/customer-service-java25:1.0
+        docker push yahyasystementor/customer-service-java25:${{github.run_number}}
 
 
       env:
