@@ -1,4 +1,4 @@
-name: Java CI integrationTests
+name: Java CI integrationTests and Build Docker image
 
 on:
   push:
@@ -15,7 +15,6 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         java: [17,21]
-
 
     services:
       mysql:
@@ -46,6 +45,17 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package -DskipTests
+
+    - name: Login to Dockerhub
+      run: echo "dckr_pat_1jHEDDwA7CZ21uoWUdSCbgjZIQc" | docker login -u "yahyasystementor" --password-stdin
+
+    - name: build image
+      run: |
+        docker build -t yahyasystementor/customer-service-java25:1.0 .
+
+    - name: push to docker hub
+      run: |
+        docker push yahyasystementor/customer-service-java25:1.0
 
 
       env:
