@@ -47,15 +47,15 @@ jobs:
       run: mvn -B package -DskipTests
 
     - name: Login to Dockerhub
-      run: echo "dckr_pat_1jHEDDwA7CZ21uoWUdSCbgjZIQc" | docker login -u "yahyasystementor" --password-stdin
+      run: echo "${{secrets.DOCKERHUB_TOKEN}}" | docker login -u ""${{secrets.DOCKERHUB_USERNAME}}" --password-stdin
 
     - name: build image
       run: |
-        docker build -t yahyasystementor/customer-service-java25:${{github.run_number}} .
+        docker build -t ${{secrets.DOCKERHUB_USERNAME}}/customer-service-java25:${{github.run_number}} .
 
     - name: push to docker hub
       run: |
-        docker push yahyasystementor/customer-service-java25:${{github.run_number}}
+        docker push ${{secrets.DOCKERHUB_USERNAME}}/customer-service-java25:${{github.run_number}}
 
 
       env:
